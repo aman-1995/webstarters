@@ -1,5 +1,4 @@
-DROP TABLE IF EXISTS `lzc_component_details`;
-CREATE TABLE `lzc_component_details`
+CREATE TABLE IF NOT EXISTS `lzc_component_details`
 (
    `component_id`             VARCHAR(100) NOT NULL,
    `component_description`    VARCHAR(200) NULL,
