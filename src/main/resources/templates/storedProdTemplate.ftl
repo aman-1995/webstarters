@@ -1,19 +1,20 @@
-DROP PROCEDURE IF EXISTS ${storedProdName};
+DELIMITER $$
+DROP PROCEDURE IF EXISTS ${storedProdName}$$
 CREATE PROCEDURE ${storedProdName}(${inParams}, forCount INT, limitFrom INT, limitTo INT, sortIndex VARCHAR(100), sortOrder VARCHAR(20))
 BEGIN
 
-	SET @selectString = ${selectString!"' '"};
-	SET @fromString = ${fromString!"' '"};
+	SET @selectString = '${selectString!" "}';
+	SET @fromString = '${fromString!" "}';
 	SET @whereString = ' ';
 	SET @groupByString = ' ';
 	SET @limitString = CONCAT(' LIMIT ','',CONCAT(limitFrom,',',limitTo));
 
 	<#list filterParams as param>	
-	IF NOT ${param} IS NULL THEN
+	IF NOT ${param['param']} IS NULL THEN
     		IF  @whereString != '' THEN
-      			SET @whereString = CONCAT(@whereString,' AND column_name LIKE ''%',${param},'%''');
+      			SET @whereString = CONCAT(@whereString,' AND ${param['columnName']} LIKE ''%',${param['param']},'%''');
     		ELSE
-      			SET @whereString = CONCAT(' WHERE column_name LIKE ''%',${param},'%''');
+      			SET @whereString = CONCAT(' WHERE ${param['columnName']} LIKE ''%',${param['param']},'%''');
     		END IF;  
   	END IF;
   	
@@ -34,4 +35,5 @@ BEGIN
 	PREPARE query FROM @queryString;
  	EXECUTE query;
  	DEALLOCATE PREPARE query;
-END;
+END$$
+DELIMITER ;

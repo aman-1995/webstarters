@@ -29,7 +29,7 @@ public class LazyComponentHelperDao {
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate = null;
 
 	public List<Map<String, Object>> getTableInformationByName(String tableName) {
-		String query = "select COLUMN_NAME as columnName from information_schema.COLUMNS "
+		String query = "select COLUMN_NAME as columnName, COLUMN_TYPE as columnType from information_schema.COLUMNS "
 				+ " where TABLE_NAME = :tableName and TABLE_SCHEMA = :schemaName ORDER BY ORDINAL_POSITION ASC ";
 		List<Map<String, Object>> resultSet = new ArrayList<>();
 		try (Connection connection = dataSource.getConnection();){
@@ -55,5 +55,19 @@ public class LazyComponentHelperDao {
         	expection.printStackTrace();
         }
         return results;
-}
+	}
+	
+	public List<String> getTableInformation() {
+		String query = "select TABLE_NAME as tableName from information_schema.TABLES where TABLE_SCHEMA = :schemaName ORDER BY TABLE_SCHEMA ASC ";
+		List<String> resultSet = new ArrayList<>();
+		try (Connection connection = dataSource.getConnection();){
+			String schemaName = connection.getCatalog();
+			Map<String, Object> parameterMap = new HashMap<>();
+			parameterMap.put("schemaName", schemaName);
+			resultSet = namedParameterJdbcTemplate.queryForList(query, parameterMap, String.class);
+		} catch (SQLException exception) {
+			exception.printStackTrace();
+		}
+		return resultSet;
+	}
 }
