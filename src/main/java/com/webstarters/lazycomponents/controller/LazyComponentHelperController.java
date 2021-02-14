@@ -4,15 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-import org.apache.commons.text.CaseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -87,7 +86,8 @@ public class LazyComponentHelperController {
 	
 	private Template getFreeMakerTemplate(String templateName) throws IOException {
 		templateConfiguration.setAPIBuiltinEnabled(Boolean.TRUE);
-		File fileTemplate = new File(LazyComponentHelperController.class.getResource("/templates/"+templateName+".ftl").getFile());
+		String templatePath = URLDecoder.decode(LazyComponentHelperController.class.getResource("/templates/"+templateName+".ftl").getFile(), StandardCharsets.UTF_8);
+		File fileTemplate = new File(templatePath);
 		String templateContent = new String(Files.readAllBytes(fileTemplate.toPath()));
 		Template template = new Template(templateName, templateContent, templateConfiguration);
 		return template;
