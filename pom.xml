@@ -52,6 +52,8 @@
 	<properties>
 		<java.version>11</java.version>
 		<skipTests>true</skipTests>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        	<destinationDir>${project.build.outputDirectory}</destinationDir>
 	</properties>
 
 	<dependencies>
