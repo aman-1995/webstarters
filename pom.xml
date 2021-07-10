@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>com.github.aman-1995</groupId>
 	<artifactId>lazycomponents</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>lazycomponents</name>
 	<description>Webstarters</description>
 	<url>https://github.com/aman-1995/webcomponents</url>
@@ -45,7 +45,7 @@
 		<connection>scm:git:https://github.com/aman-1995/webcomponents.git</connection>
 		<developerConnection>scm:git:git@github.com:aman-1995/webcomponents.git</developerConnection>
 		<url>https://github.com/aman-1995/webcomponents</url>
-		<tag>lazycomponents-1.0.0</tag>
+		<tag>webstarters-1.0</tag>
 	</scm>
 
 	<properties>
