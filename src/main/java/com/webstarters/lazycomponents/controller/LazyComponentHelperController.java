@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.Resources;
 import com.webstarters.lazycomponents.services.impl.LazyComponentHelperService;
 
 import freemarker.template.Configuration;
@@ -86,9 +88,7 @@ public class LazyComponentHelperController {
 	
 	private Template getFreeMakerTemplate(String templateName) throws IOException {
 		templateConfiguration.setAPIBuiltinEnabled(Boolean.TRUE);
-		String templatePath = URLDecoder.decode(LazyComponentHelperController.class.getResource("/templates/"+templateName+".ftl").getFile(), StandardCharsets.UTF_8);
-		File fileTemplate = new File(templatePath);
-		String templateContent = new String(Files.readAllBytes(fileTemplate.toPath()));
+		String templateContent = Resources.toString(Resources.getResource("/templates/"+templateName+".ftl"), Charsets.UTF_8);
 		Template template = new Template(templateName, templateContent, templateConfiguration);
 		return template;
 	}

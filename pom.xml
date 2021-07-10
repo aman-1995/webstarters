@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>com.github.aman-1995</groupId>
 	<artifactId>lazycomponents</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>lazycomponents</name>
 	<description>Webstarters</description>
 	<url>https://github.com/aman-1995/webcomponents</url>
@@ -52,7 +52,7 @@
 		<java.version>11</java.version>
 		<skipTests>true</skipTests>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        	<destinationDir>${project.build.outputDirectory}</destinationDir>
+        	<destinationDir>${project.build.outputDirectory}/resources</destinationDir>
 	</properties>
 
 	<dependencies>
@@ -87,6 +87,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-freemarker</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>30.1-jre</version>
+		  </dependency>
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
